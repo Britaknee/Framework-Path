@@ -12,10 +12,6 @@ from pynalytics import Preprocessing
 
 #Set file and screen size
 df = pd.read_csv('/Users/britanny/Documents/School Files/Thesis/Framework/data.csv')
-#df = pd.DataFrame()
-#df.to_csv('holder.csv')
-#df = pd.read_csv('holder.csv')
-#new_df = pd.DataFrame()
 width = '1920'
 height = '1080'
 
