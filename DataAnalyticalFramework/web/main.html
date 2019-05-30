@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Pynalytics</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/dragula.min.css">
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+        <script src="js/jquery-3.3.1.slim.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/papaparse.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/dragula.min.js"></script>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+       <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navigation">
+       <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" id="title" href="main.html">
+                <img src="img/logo.png" alt="logo" id="logo">
+                Pynalytics
+          </a>
+        </li>
+        <li class="nav-item positioned"><a class="nav-link" id="dataLink" data-toggle="modal" data-target="#dataModal" onclick="showTable()"><img src="img/table.png" alt="table" id="data">Data</a></li>
+
+        <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="dataModalLabel"><img src="img/table.png" alt="table" id="data">Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="importBody">
+              <!--
+              <div class="row">
+                <div class="col-md-8">
+                  <input type="file" name="file" id="file" accept=".csv">
+                  <label for="file" id="fileLabel"><img src="img/upload.png" alt="upload" id="uploadIcon"><p id="uploadLabel">Upload</p></label>
+                </div>
+                <div class="col-md-4">
+                  <button type="button" onclick="clickImported()" id="importButton">Import</button>
+                </div>
+              </div>
+              <br>
+              <div>
+              -->
+              <div id="csvTable"></div>
+              <!--
+              <br>
+              <img src="img/wrench.png" alt="wrench" id="preprocess">Preprocess
+              <div id="preprocess-portion">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="columnRemove">
+                <label class="form-check-label" for="columnRemove">
+                  Remove columns with null values
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="rowRemove">
+                <label class="form-check-label" for="rowRemove">
+                  Remove rows with null values
+                </label>
+              </div>
+              <button type="button" id="preprocessAccept" onclick="preprocessAccept()">Accept</button><br>
+              Rows Removed
+              </div>
+              </div>
+              -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!--<button type="submit" class="btn btn-success" onclick='updateDf()'>Save</button>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal fade" id="regressionSettingsModal" tabindex="-1" role="dialog" aria-labelledby="regressionSettingsModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="regressionSettingsModalLabel"><img src="img/regressionSettings.png" alt="regression" id="rSettings">Settings</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <form>
+                    Type of regression:<br>
+                    <div class="left-spaced">
+                      <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="linearRegression" name="regressionType" class="custom-control-input" value="linear">
+                          <label class="custom-control-label" for="linearRegression">Linear</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="polynomialRegression" name="regressionType" class="custom-control-input" value="polynomial">
+                          <label class="custom-control-label" for="polynomialRegression">Polynomial</label>
+                      </div>
+                    </div>
+                </form><br>
+                Select the dependent and independent variables to be used:
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="select-head columns col-md-3">Columns</div>
+                  <div class="select-head targets col-md-3" id="dependentVariable">Dependent Variable</div>
+                  <div class="select-head col-md-3" id="independentVariable">Independent Variable</div>
+                  <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="drag-container col-md-3 left dataColumns">
+                  </div>
+                  <div class="drag-container col-md-3 middle" id="regressionDependent">
+                  </div>
+                  <div class="drag-container col-md-3 right" id="regressionIndependent">
+                  </div>
+                  <div class="col-md-1"></div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary accept" id="regressionSubmit" onclick="regressionResultsDisplay()">Accept</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div class="modal fade" id="naiveBayesSettingsModal" tabindex="-1" role="dialog" aria-labelledby="naiveBayesSettingsModalLabel" aria-hidden="true">
+              <div class="modal-dialog  modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="naiveBayesSettingsModalLabel"><img src="img/naiveBayesSettings.png" alt="naiveBayes" id="nSettings">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  Select the target feature and other features to be used:
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="select-head columns col-md-3">Columns</div>
+                    <div class="select-head targets col-md-3">Target</div>
+                    <div class="select-head col-md-3">Features</div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="drag-container col-md-3 left dataColumns">
+                    </div>
+                    <div class="drag-container col-md-3 middle" id="naiveBayesTarget">
+                    </div>
+                    <div class="drag-container col-md-3 right" id="naiveBayesFeatures">
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary accept" id="naiveBayesSubmit" onclick="naiveBayesResultsDisplay()">Accept</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <div class="modal fade" id="kmeansSettingsModal" tabindex="-1" role="dialog" aria-labelledby="kmeansSettingsModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="kmeansSettingsModalLabel"><img src="img/kmeansSettings.png" alt="kmeans" id="kSettings">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              Select the features to be used:
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="select-head columns col-md-5">Columns</div>
+                <div class="select-head col-md-5">Features</div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="drag-container col-md-5 left dataColumns">
+                </div>
+                <div class="drag-container col-md-5 right" id="kmeansFeatures">
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <form>
+                Number of clusters:
+                <div class="left-spaced">
+                <input type="number" class="numberField" id="clusterNumber" min="2" max="20" placeholder=" ">
+                </div>
+              </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary accept" id="kmeansSubmit" onclick="kmeansResultsDisplay()">Accept</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       </ul>
+       <ul class="navbar-nav ml-auto">
+        <li class="nav-item spaced"><a class="nav-link" href="help_pdf/Guide for Regression, Naive Bayes and K-means.pdf" download=""><img src="img/help.png" alt="help" id="help">Help</a></li>
+       </ul>
+       </nav>
+
+       <div class="row">
+        <div class="col-md-3" id="leftbar">
+                <p class="subtitle">Processes</p>
+                <div id="leftbar-content">
+                  <div id="process-bar">
+                        <button type="button" class="processButton" id="regressionButton" data-toggle="modal" data-target="#regressionSettingsModal" onclick="regressionDisplay()"><img src="img/regression.png" alt="regression" class="process-icons"><p id="regressionLabel">Regression</p></button>
+                        <button type="button" class="processButton" id="naiveBayesButton" data-toggle="modal" data-target="#naiveBayesSettingsModal" onclick="naiveBayesDisplay()"><img src="img/naiveBayes.png" alt="naiveBayes" class="process-icons">Naive Bayes</button>
+                        <button type="button" class="processButton" id="kmeansButton" data-toggle="modal" data-target="#kmeansSettingsModal" onclick="kmeansDisplay()"><img src="img/kmeans.png" alt="kmeans" class="process-icons">K-means</button>
+                  </div>
+                </div>
+        </div>
+        <div class="col-md-9" id="rightbar">
+                <p class="subtitle">Results</p>
+                <div id="regression-rightbar-content">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <button class="rightButton" id="lineGraphButton" onclick="lineGraph()"><img src="img/lineGraph.png" alt="lineGraph" class="rightbar-icons">Scatter Plot</button>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                      <button class="rightButton comparison" onclick="compare()"><img src="img/compare.png" alt="compare" class="rightbar-icons">Compare</button>
+                    </li>
+                    -->
+                  </ul>
+                  <center>
+                  <iframe class="display" id="rdisplay">
+                  </iframe>
+                  </center>
+                  <div class="process-result">
+                    <p class="resultValues title">Table Summary:</p><br>
+                    <div id="regressionTable"></div>
+                  </div>
+                </div>
+                <div id="naiveBayes-rightbar-content">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <button class="rightButton" id="confusionButton" onclick="confusionMatrix()"><img src="img/naiveBayes.png" alt="confusionMatrix" class="rightbar-icons">Confusion Matrix</button>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                      <button class="rightButton comparison" onclick="compare()"><img src="img/compare.png" alt="compare" class="rightbar-icons">Compare</button>
+                    </li>
+                    -->
+                  </ul>
+                  <center>
+                  <iframe class="display" id="ndisplay">
+                  </iframe>
+                  </center>
+                  <div class="process-result">
+                    <p class="resultValues title">Summarized results:</p><br>
+                    <div id="naiveTable"></div>
+                  </div>
+                </div>
+                <div id="kmeans-rightbar-content">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <button class="rightButton" id="centroidButton" onclick="centroid()"><img src="img/centroids.png" alt="centroids" class="rightbar-icons">Centroid Chart</button>
+                    </li>
+                    <li class="nav-item">
+                      <button class="rightButton" id="clusterButton" onclick="cluster()"><img src="img/clusters.png" alt="clusters" class="rightbar-icons">Cluster Graph</button>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                      <button class="rightButton comparison" onclick="compare()"><img src="img/compare.png" alt="compare" class="rightbar-icons">Compare</button>
+                    </li>
+                    -->
+                  </ul>
+                  <center>
+                  <iframe class="display" id="kdisplay">
+                  </iframe>
+                  </center>
+                  <div class="process-result">
+                    <p class="resultValues title">Centroids: </p><p class="resultValues" id="centroidValues"></p><br>
+                    <p class="resultValues title">Silhouette Coefficient: </p><p class="resultValues" id="silhouetteCoefficient"></p>
+                  </div>
+                </div>
+              <img src="img/graph.png" alt="graph" id="graphTemp">
+        </div>
+      </div>
+    </body>
+</html>

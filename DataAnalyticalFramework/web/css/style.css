@@ -1,0 +1,360 @@
+body{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+#title{
+    font-size: 20px;
+}
+#logo{
+    width: 50px;
+}
+.spaced{
+    padding: 10px;
+}
+.positioned{
+    padding-top: 10px;
+}
+#navigation{
+    height: 80px;
+}
+#leftbar{
+    background-color: #E5E4E2; 
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+#rightbar{
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+#leftbar-content{
+    padding: 0px 20px 0px;
+}
+.subtitle{
+    font-size: 20px; 
+    padding: 20px 20px 0px;
+    font-weight: bold;
+}
+#help{
+    width: 26px;
+    padding-right: 5px;
+}
+#processes{
+    width: 30px;
+    padding-right: 5px;
+}
+#preprocess{
+    width: 29px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+#preprocessLink{
+    cursor: pointer;
+}
+#data{
+    width: 28px;
+    padding-right: 5px;
+    padding-bottom: 4px;
+    cursor: pointer;
+}
+#dataLink{
+    cursor: pointer;
+}
+.rightnav{
+    color: #848482;
+}
+.rightnav:hover{
+    color: #3EA99F;
+    background-color: #F9F8F6;
+}
+.process-icons{
+    width: 40px;
+    padding-right: 4px;
+}
+.resultValues{
+    display: inline;
+    font-size: 16px;
+}
+.processButton{
+    width: 100%;
+    font-size: 18px;
+    text-align: left;
+    border: none;
+    background-color: transparent;
+}
+.processButton:hover{
+    color: #FFFFFF;
+    background-color: #667D95;
+    width: 100%;
+}
+.processButtonSelected{
+    font-size: 18px;
+    text-align: left;
+    border: none;
+    color: #FFFFFF;
+    background-color: #667D95;
+    width: 100%;
+}
+.rightButton{
+    padding: 5px;
+    border-radius: 5px 5px 0px 0px;
+    margin-right: 5px;
+    background-color: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 1px solid #E3E6E6;
+    text-shadow: 0px 0px 0px transparent;
+}
+.rightButton:hover{
+    background-color: #E3E6E6 !important;
+}
+.display{
+    width: 700px;
+    height: 528px;
+    border-style: solid;
+    border-color: #2A2A28;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#process-information{
+    padding-top: 20px;
+}
+.align-right{
+    float: right !important;
+}
+#text-style{
+    font-size: 16px;
+    font-weight: normal;
+}
+#kmeans-rightbar-content{
+    padding-left: 15px;
+    display: none;
+}
+#naiveBayes-rightbar-content{
+    padding-left: 15px;
+    display: none;
+}
+#regression-rightbar-content{
+    padding-left: 15px;
+    display: none;
+}
+.rightbar-icons{
+    width: 28px;
+    padding-right: 5px;
+}
+#kmeans-leftbar-content{
+    display: none;
+}
+#naiveBayes-leftbar-content{
+    display: none;
+}
+#linear-regression-leftbar-content{
+    display: none;
+}
+#polynomial-regression-leftbar-content{
+    display: none;
+}
+#rSettings{
+    width: 40px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+}
+#kSettings{
+    width: 40px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+}
+#nSettings{
+    width: 40px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+}
+#graphTemp{
+    width: 72vw;
+    height: 37vw;
+    z-index: 1;
+    position: absolute;
+    border-style: solid;
+    border-color: #2A2A28;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0px 0px 20px 20px;
+}
+.left-spaced{
+    display: inline;
+    padding-left: 4px;
+}
+.numberField{
+    width: 40px;
+    text-align: center;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #939FB0;
+}
+.naiveBorder{
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-color: #C7C6C4;
+}
+#file{
+    display: none;
+}
+#importButton{
+    border-width: 1px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-color: transparent;
+    height: 29px;
+    background-color: #46C7C7;
+    color: #FFFFFF;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    left: 0px;
+}
+#importButton:hover{
+    background-color: #28A9A9;
+}
+#fileLabel{
+    width: 100%;
+    height: 29px;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: #EFEEEC;
+    position: absolute;
+    cursor: pointer;
+}
+#fileLabel:hover{
+    background-color: #DADBD9;
+}
+#uploadIcon{
+    width: 18px;
+    padding-bottom: 2.5px;
+    padding-right: 4px;
+}
+#uploadLabel{
+    display: inline;
+}
+.select-head{
+    background-color: #7AE17A;
+    padding: 7px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0px 5px 0px 5px;
+    color: white;
+}
+.left{
+    height: 160px;
+    padding: 5px;
+    margin: 0px 5px 20px 5px;
+    background-color: #EFEEEC;
+    overflow: auto;
+}
+.middle{
+    height: 160px;
+    padding: 5px;
+    margin: 0px 5px 20px 5px;
+    background-color: #EFEEEC;
+    overflow: auto;
+}
+.right{
+    height: 160px;
+    padding: 5px;
+    margin: 0px 5px 20px 5px;
+    background-color: #EFEEEC;
+    overflow: auto;
+}
+.item{
+    width: 100%;
+    cursor: grab;
+}
+.item:hover{
+    background-color: rgba(202, 202, 200, 0.4);
+}
+.item:active{
+    background-color: rgba(202, 202, 200, 0.4);
+    cursor: grabbing;
+}
+.accept{
+    background-color: #64B3B3;
+    border-color: #64B3B3;
+}
+.accept:hover{
+    background-color: #469595;
+    border-color: #469595;
+}
+.columns{
+    background-color: #B6B6B4;
+}
+.targets{
+    background-color: #F75D59;
+}
+#csvTable{
+    max-height: 400px;
+    margin-top: 10px;
+    overflow: auto;
+}
+table{
+    width: 100%;
+    font-size: 14px;
+    background-color: #FFFFFF;
+}
+th{
+    text-align: left;
+    background-color: #2C3539;
+    padding: 5px;
+    font-weight: normal;
+    color: #FFFFFF;
+}
+td{
+    padding: 5px;
+}
+tr:nth-child(even){
+    background-color: #DDDDDD;
+}
+#preprocess{
+    width: 28px;
+    padding-bottom: 5px;
+}
+#tableShow{
+    display: none;
+}
+.comparison{
+    position: absolute;
+    right: 5%;
+}
+.title{
+    font-weight: bold;
+}
+#regressionLabel{
+    display: inline;
+}
+#columnRemove{
+    display: block;
+}
+#rowRemove{
+    display: block;
+}
+#preprocessAccept{
+    background-color: #7AE17A;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 2px;
+    border-color: transparent;
+    text-align: center;
+    color: white;
+}
+#preprocess-portion{
+    margin-left: 10px;
+}
+.process-result{
+    margin-bottom: 10px;
+}
+#regressionTable{
+    margin-right: 10px;
+}
+#naiveTable{
+    margin-right: 10px;
+}
